@@ -1,0 +1,45 @@
+ea4bc82a6ad023ab7ee23ee620429895
+::res://::1732093122
+::res://assets/::1732093038
+default_env.tres::Environment::-1::1690116911::0::1::::<><>::
+icon.png::CompressedTexture2D::2432420761471245026::1690116911::1732093164::1::::<><>::
+icon.svg::CompressedTexture2D::9162371498834860976::1690116911::1732093164::1::::<><>::
+README.md::TextFile::-1::1690795285::0::1::::<><>::
+::res://assets/fonts/::1732080287
+::res://assets/fonts/digital/::1732093038
+Inter-Black.ttf::FontFile::2023361649885781834::1694723238::1732093164::1::::<><>::
+::res://assets/fonts/letter/::1732093038
+Roboto-Bold.ttf::FontFile::7183128479095054959::1663817230::1732093164::1::::<><>::
+Roboto-Light.ttf::FontFile::2934334192827154238::1663817230::1732093164::1::::<><>::
+Walter-Bold.ttf::FontFile::6104160909452173604::1570526552::1732093164::1::::<><>::
+::res://entities/::1732087062
+::res://entities/dice/::1732093129
+beast.json::JSON::-1::1732083418::0::1::::<><>::
+dice.gd::GDScript::-1::1732093129::0::1::::Dice<>RigidBody3D<>::
+dice.json::JSON::-1::1732083432::0::1::::<><>::
+dice.tscn::PackedScene::6598566801292916453::1732093129::0::1::::<><>::res://entities/dice/dice.gd<>uid://bbyh6kb6a1h1t::::res://entities/dice face/dice face.tscn<>uid://glgvjemdhpsd::::res://entities/dice face/faces/6.png<>uid://d1gnhcphgftv::::res://entities/dice face/faces/1.png<>uid://cernqgcal8oq8::::res://entities/dice face/faces/2.png<>uid://dx4imtunllewp::::res://entities/dice face/faces/3.png<>uid://b2h6qev86oqea::::res://entities/dice face/faces/4.png<>uid://7dq5mfmwvc5c::::res://entities/dice face/faces/5.png
+element.json::JSON::-1::1732083422::0::1::::<><>::
+::res://entities/dice face/::1732093130
+dice face.gd::GDScript::-1::1732091938::0::1::::DiceFace<>MeshInstance3D<>::
+dice face.tscn::PackedScene::2506635500176819987::1732093130::0::1::::<><>::uid://dx4imtunllewp::::res://entities/dice face/faces/3.png<>res://entities/dice face/dice face.gd
+::res://entities/dice face/faces/::1732093038
+0.png::CompressedTexture2D::2898137547938844956::1732084240::1732093164::1::::<><>::
+1.png::CompressedTexture2D::264628241241201583::1732084240::1732093164::1::::<><>::
+2.png::CompressedTexture2D::5089509375611513393::1732084240::1732093164::1::::<><>::
+3.png::CompressedTexture2D::8833980604536310963::1732084240::1732093164::1::::<><>::
+4.png::CompressedTexture2D::4297881149752290184::1732084240::1732093164::1::::<><>::
+5.png::CompressedTexture2D::2253261813960302926::1732084240::1732093164::1::::<><>::
+6.png::CompressedTexture2D::444243500190349579::1732084241::1732093164::1::::<><>::
+7.png::CompressedTexture2D::1889345868152914512::1732084241::1732093164::1::::<><>::
+::res://entities/dice pool/::1732093148
+dice pool.gd::GDScript::-1::1732093062::0::1::::DicePool<>Node3D<>::
+dice pool.tscn::PackedScene::8203182980367346730::1732093148::0::1::::<><>::res://entities/dice pool/dice pool.gd<>uid://c7b2c3185ud7p::::res://entities/pool plane/pool plane.tscn
+::res://entities/pool plane/::1732093129
+pool plane.gd::GDScript::-1::1732091411::0::1::::PoolPlane<>StaticBody3D<>::
+pool plane.tscn::PackedScene::7022593184308771067::1732093129::0::1::::<><>::res://entities/pool plane/pool plane.gd
+::res://entities/world/::1732093129
+world.gd::GDScript::-1::1732088921::0::1::::World<>Node<>::
+world.tscn::PackedScene::8246655032211948728::1732093129::0::1::::<><>::res://entities/world/world.gd<>uid://do4xhwky8pgte::::res://entities/dice pool/dice pool.tscn
+::res://script/::1732088908
+Global.gd::GDScript::-1::1732088908::0::1::::<>Node<>::
+::res://shaders/::1728818099
