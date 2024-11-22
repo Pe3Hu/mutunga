@@ -7,13 +7,12 @@ bounce = 0.1
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_gvvct"]
 resource_local_to_scene = true
-size = Vector3(1, 0.007, 1)
+size = Vector3(40, 0.28, 40)
 
 [node name="PoolPlane" type="StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.35, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 14, 0)
 physics_material_override = SubResource("PhysicsMaterial_hfvo8")
 script = ExtResource("1_6favm")
-dimensions = Vector3(1, 0.7, 1)
 orientation = 1
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]

@@ -14,68 +14,62 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_l43ur"]
 size = Vector3(1.98, 1.98, 1.98)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v3ggu"]
-albedo_color = Color(0.09, 0.9, 0.09, 1)
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jiu5q"]
+albedo_color = Color(0.09, 0.495, 0.9, 1)
 
-[sub_resource type="BoxMesh" id="BoxMesh_4kxiq"]
-material = SubResource("StandardMaterial3D_v3ggu")
+[sub_resource type="BoxMesh" id="BoxMesh_7tl5w"]
+material = SubResource("StandardMaterial3D_jiu5q")
 size = Vector3(1.98, 1.98, 1.98)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0vl6b"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rb54n"]
 transparency = 1
-albedo_color = Color(0.846, 0.9, 0.09, 1)
 albedo_texture = ExtResource("4_mrj6q")
 
-[sub_resource type="PlaneMesh" id="PlaneMesh_2ggk7"]
-material = SubResource("StandardMaterial3D_0vl6b")
+[sub_resource type="PlaneMesh" id="PlaneMesh_vvmbt"]
+material = SubResource("StandardMaterial3D_rb54n")
 center_offset = Vector3(1, 0, 0)
 orientation = 0
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fkyj6"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r4ptg"]
 transparency = 1
-albedo_color = Color(0.846, 0.9, 0.09, 1)
 albedo_texture = ExtResource("5_8vb8u")
 
-[sub_resource type="PlaneMesh" id="PlaneMesh_xn5la"]
-material = SubResource("StandardMaterial3D_fkyj6")
+[sub_resource type="PlaneMesh" id="PlaneMesh_3pbg6"]
+material = SubResource("StandardMaterial3D_r4ptg")
 center_offset = Vector3(0, 1, 0)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_avbjp"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_s3y7r"]
 transparency = 1
-albedo_color = Color(0.846, 0.9, 0.09, 1)
 albedo_texture = ExtResource("6_pcvik")
 
-[sub_resource type="PlaneMesh" id="PlaneMesh_nfc8b"]
-material = SubResource("StandardMaterial3D_avbjp")
+[sub_resource type="PlaneMesh" id="PlaneMesh_jnjb2"]
+material = SubResource("StandardMaterial3D_s3y7r")
 center_offset = Vector3(0, 0, 1)
 orientation = 2
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ge77h"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fy8uc"]
 transparency = 1
-albedo_color = Color(0.846, 0.9, 0.09, 1)
 albedo_texture = ExtResource("3_ejets")
 
-[sub_resource type="PlaneMesh" id="PlaneMesh_vgrdi"]
-material = SubResource("StandardMaterial3D_ge77h")
+[sub_resource type="PlaneMesh" id="PlaneMesh_hwwk8"]
+material = SubResource("StandardMaterial3D_fy8uc")
 center_offset = Vector3(1, 0, 0)
 orientation = 0
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vve4x"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bwhs5"]
 transparency = 1
-albedo_color = Color(0.846, 0.9, 0.09, 1)
 albedo_texture = ExtResource("8_n6d3b")
 
-[sub_resource type="PlaneMesh" id="PlaneMesh_rh2is"]
-material = SubResource("StandardMaterial3D_vve4x")
+[sub_resource type="PlaneMesh" id="PlaneMesh_o1n85"]
+material = SubResource("StandardMaterial3D_bwhs5")
 center_offset = Vector3(0, 1, 0)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_owdvs"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qmi3v"]
 transparency = 1
-albedo_color = Color(0.846, 0.9, 0.09, 1)
 albedo_texture = ExtResource("7_78bae")
 
-[sub_resource type="PlaneMesh" id="PlaneMesh_aoi3h"]
-material = SubResource("StandardMaterial3D_owdvs")
+[sub_resource type="PlaneMesh" id="PlaneMesh_4w1qm"]
+material = SubResource("StandardMaterial3D_qmi3v")
 center_offset = Vector3(0, 0, 1)
 orientation = 2
 
@@ -84,7 +78,7 @@ physics_material_override = SubResource("PhysicsMaterial_mcj2d")
 gravity_scale = 2.0
 freeze = true
 script = ExtResource("1_1f3vj")
-aspect = 2
+aspect = 1
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 unique_name_in_owner = true
@@ -92,21 +86,21 @@ shape = SubResource("BoxShape3D_l43ur")
 
 [node name="Cube" type="MeshInstance3D" parent="."]
 unique_name_in_owner = true
-mesh = SubResource("BoxMesh_4kxiq")
+mesh = SubResource("BoxMesh_7tl5w")
 
 [node name="Faces" type="Node3D" parent="."]
 unique_name_in_owner = true
 
 [node name="DiceFace0" parent="Faces" node_paths=PackedStringArray("dice") instance=ExtResource("2_gsyfy")]
 unique_name_in_owner = true
-mesh = SubResource("PlaneMesh_2ggk7")
+mesh = SubResource("PlaneMesh_vvmbt")
 dice = NodePath("../..")
 dimension = 2.0
 value = 1
 
 [node name="DiceFace1" parent="Faces" node_paths=PackedStringArray("dice") instance=ExtResource("2_gsyfy")]
 unique_name_in_owner = true
-mesh = SubResource("PlaneMesh_xn5la")
+mesh = SubResource("PlaneMesh_3pbg6")
 dice = NodePath("../..")
 dimension = 2.0
 value = 2
@@ -114,7 +108,7 @@ orientation = 1
 
 [node name="DiceFace2" parent="Faces" node_paths=PackedStringArray("dice") instance=ExtResource("2_gsyfy")]
 unique_name_in_owner = true
-mesh = SubResource("PlaneMesh_nfc8b")
+mesh = SubResource("PlaneMesh_jnjb2")
 dice = NodePath("../..")
 dimension = 2.0
 value = 3
@@ -123,7 +117,7 @@ orientation = 2
 [node name="DiceFace3" parent="Faces" node_paths=PackedStringArray("dice") instance=ExtResource("2_gsyfy")]
 unique_name_in_owner = true
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
-mesh = SubResource("PlaneMesh_vgrdi")
+mesh = SubResource("PlaneMesh_hwwk8")
 dice = NodePath("../..")
 dimension = 2.0
 value = 6
@@ -132,7 +126,7 @@ orientation = 3
 [node name="DiceFace4" parent="Faces" node_paths=PackedStringArray("dice") instance=ExtResource("2_gsyfy")]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0)
-mesh = SubResource("PlaneMesh_rh2is")
+mesh = SubResource("PlaneMesh_o1n85")
 dice = NodePath("../..")
 dimension = 2.0
 value = 5
@@ -141,7 +135,7 @@ orientation = 4
 [node name="DiceFace5" parent="Faces" node_paths=PackedStringArray("dice") instance=ExtResource("2_gsyfy")]
 unique_name_in_owner = true
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.0113118, -2.38419e-07, -0.00332785)
-mesh = SubResource("PlaneMesh_aoi3h")
+mesh = SubResource("PlaneMesh_4w1qm")
 dice = NodePath("../..")
 dimension = 2.0
 value = 4

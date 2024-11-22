@@ -1,17 +1,15 @@
 res://entities/world/world.tscn
-res://entities/bourse/bourse.tscn
-res://entities/bourse/bourse.gd
-res://entities/dicepool/bourse.tscn
-res://entities/dicepool/dice pool.tscn
-res://entities/pool plane/pool plane.tscn
-res://entities/pool plane/pool plane.gd
 res://entities/dice pool/dice pool.tscn
-res://entities/dice pool/dice pool.gd
+res://entities/pool plane/pool plane.tscn
 res://entities/dice/dice.tscn
-res://entities/dice/dice.gd
-res://entities/dice_face.tscn
-res://entities/dice face/dice_face.tscn
 res://entities/dice face/dice face.tscn
+res://entities/dice kit/dice kit.tscn
+res://entities/dice/dice.gd
+res://entities/dice rack/dice rack.tscn
+res://entities/dice rack/dice rack.gd
+res://entities/dice kit/dice kit.gd
+res://entities/dice pool/dice pool.gd
 res://entities/dice face/dice face.gd
+res://entities/pool plane/pool plane.gd
+res://entities/dice kit/prediction.gd
 res://script/Global.gd
-res://entities/world/world.gd

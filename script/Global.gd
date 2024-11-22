@@ -1,6 +1,8 @@
 extends Node
 
 
+
+
 var rng = RandomNumberGenerator.new()
 var arr = {}
 var color = {}
@@ -16,10 +18,12 @@ func _ready() -> void:
 	#get_tree().bourse.resource.after_init()
 	
 func init_arr() -> void:
-	pass
+	arr.values = [1, 2, 3, 4, 5, 6, 7]
 	
 func init_dict() -> void:
 	init_direction()
+	
+	init_dice()
 	
 func init_direction() -> void:
 	dict.direction = {}
@@ -44,18 +48,34 @@ func init_direction() -> void:
 		direction = dict.direction.diagonal[_i]
 		dict.direction.hybrid.append(direction)
 	
+func init_dice() -> void:
+	dict.dice = {}
+	dict.dice.title = {}
+	
+	var path = "res://entities/dice/dice.json"
+	var array = load_data(path)
+	
+	for dice in array:
+		var data = {}
+		var words = dice.values.split(",")
+		data.values = []
+		data.probabilities = {}
+		
+		for word in words:
+			var value = int(word)
+			data.values.append(value)
+			
+			if !data.probabilities.has(value):
+				data.probabilities[value] = 0
+			
+			data.probabilities[value] += 1.0 / words.size()
+		
+		var title = Constants.ASPECT.get(dice.title.to_upper())
+		dict.dice.title[title] = data
+	
 func init_color():
 	pass
 	#var h = 360.0
-	
-	#color.aspect[TokenResource.Aspect.NETWORK] = Color.from_hsv(160 / h, 0.8, 0.5)
-	#color.aspect[TokenResource.Aspect.ENERGY] = Color.from_hsv(60 / h, 0.9, 0.9)
-	#color.aspect[TokenResource.Aspect.SPEED] = Color.from_hsv(35 / h, 0.9, 0.9)
-	#color.aspect[TokenResource.Aspect.PAYLOAD] = Color.from_hsv(0 / h, 0.0, 0.7)
-	#color.aspect[TokenResource.Aspect.HACK] = Color.from_hsv(280 / h, 0.9, 0.9)
-	#color.aspect[TokenResource.Aspect.FIREPOWER] = Color.from_hsv(0 / h, 0.9, 0.9)
-	#color.aspect[TokenResource.Aspect.BARRIER] = Color.from_hsv(210 / h, 0.9, 0.9)
-	#color.aspect[TokenResource.Aspect.STEALTH] = Color.from_hsv(115 / h, 0.9, 0.7)
 	
 func save(path_: String, data_): #: String
 	var file = FileAccess.open(path_, FileAccess.WRITE)
@@ -120,3 +140,17 @@ func set_combinations_based_on_size(combinations_: Dictionary, size_: int) -> vo
 				if !combinations_[size_].has(combination):
 					combinations_[size_].append(combination)
 	
+func calc_probability(aspect_: Constants.ASPECT, value_: int, n_: int, k_: int) -> float:
+	var probability = dict.dice.title[aspect_].probabilities[value_]
+	return pow(probability, n_) * pow(1 - probability, k_ - n_)
+	
+func get_pascal_triangle(n_: int, k_: int) -> int:
+	var result = 1
+	
+	for _i in range(k_ + 1, n_ + 1, 1):
+		result *= _i
+	
+	for _i in range(2, n_ - k_ + 1, 1):
+		result /= _i
+	
+	return result
