@@ -154,3 +154,28 @@ func get_pascal_triangle(n_: int, k_: int) -> int:
 		result /= _i
 	
 	return result
+	
+func rnd_log_normal(a_: float, b_: float) -> float:
+	var value = smoothstep(-4, 4, randfn(0, 1))
+	return a_ + value * (b_ + 1 - a_)
+	
+func rnd_log_normal_int(a_: float, b_: float) -> int:
+	return int(rnd_log_normal(a_, b_))
+	
+func rnd_basic_levy() -> float:
+	#var n = randfn(0, 1.0)
+	#var mean = 0
+	#var deviation = 2
+	#return mean + deviation / pow(n, 2)
+	return 2 / pow(randfn(0, 1), 2) / 10
+	
+func rnd_levy(a_: float, b_: float) -> float:
+	var value = rnd_basic_levy()
+	
+	while value >= 1:
+		value = rnd_basic_levy()
+	
+	return a_ + value * (b_ + 1 - a_)
+	
+func rnd_levy_int(a_: float, b_: float) -> int:
+	return  int(rnd_levy(a_, b_))
