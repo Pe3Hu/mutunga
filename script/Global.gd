@@ -18,10 +18,11 @@ func _ready() -> void:
 	#get_tree().bourse.resource.after_init()
 	
 func init_arr() -> void:
-	arr.values = [1, 2, 3, 4, 5, 6, 7]
+	arr.value = [1, 2, 3, 4, 5, 6, 7]
 	
 func init_dict() -> void:
 	init_direction()
+	init_factorial()
 	
 	init_dice()
 	
@@ -48,6 +49,16 @@ func init_direction() -> void:
 		direction = dict.direction.diagonal[_i]
 		dict.direction.hybrid.append(direction)
 	
+func init_factorial() -> void:
+	dict.factorial = {}
+	var n = 10
+	var value = 1
+	dict.factorial[0] = 1
+	
+	for _i in range(1, n, 1):
+		value *= _i
+		dict.factorial[_i] = int(value)
+	
 func init_dice() -> void:
 	dict.dice = {}
 	dict.dice.title = {}
@@ -69,6 +80,10 @@ func init_dice() -> void:
 				data.probabilities[value] = 0
 			
 			data.probabilities[value] += 1.0 / words.size()
+		
+		for value in arr.value:
+			if !data.probabilities.has(value):
+				data.probabilities[value] = 0.0
 		
 		var title = Constants.ASPECT.get(dice.title.to_upper())
 		dict.dice.title[title] = data
@@ -93,6 +108,15 @@ func get_random_key(dict_: Dictionary):
 		print("!bug! empty array in get_random_key func")
 		return null
 	
+	if true:
+		var keys = dict_.keys()
+		var weights = PackedFloat32Array()
+		
+		for key in keys:
+			weights.append(float(dict_[key]))
+		
+		return keys[rng.rand_weighted(weights)]
+	
 	var total = 0
 	
 	for key in dict_.keys():
@@ -112,15 +136,34 @@ func get_random_key(dict_: Dictionary):
 	print("!bug! index_r error in get_random_key func")
 	return null
 	
-func get_all_combinations_based_on_size(array_: Array, size_: int) -> Array:
+func get_all_combinations(origin_: Dictionary) -> Dictionary:
 	var combinations = {}
-	combinations[0] = array_.duplicate()
+	combinations[0] = [origin_]
+	combinations[1] = []
+	var limit = 0
+	
+	for value in origin_:
+		var child = {}
+		child[value] = 1
+		combinations[1].append(child)
+		limit += origin_[value]
+	
+	for _i in limit - 1:
+		set_combinations_based_on_size(combinations, _i + 2)
+	
+	return combinations
+	
+func get_all_combinations_based_on_size(origin_: Dictionary, size_: int) -> Array:
+	var combinations = {}
+	combinations[0] = [origin_]
 	combinations[1] = []
 	
-	for child in array_:
-		combinations[1].append([child])
+	for value in origin_:
+		var child = {}
+		child[value] = 1
+		combinations[1].append(child)
 	
-	for _i in size_ - 1:
+	for _i in size_:
 		set_combinations_based_on_size(combinations, _i + 2)
 	
 	return combinations[size_]
@@ -130,30 +173,84 @@ func set_combinations_based_on_size(combinations_: Dictionary, size_: int) -> vo
 	combinations_[size_] = []
 	
 	for parent in parents:
-		for child in combinations_[0]:
-			if !parent.has(child):
-				var combination = []
-				combination.append_array(parent)
-				combination.append(child)
-				combination.sort_custom(func(a, b): return combinations_[0].find(a) < combinations_[0].find(b))
-				
-				if !combinations_[size_].has(combination):
-					combinations_[size_].append(combination)
+		var childs = get_unused_values(parent, combinations_[0].front())
+		
+		for child in childs:
+			var combination = parent.duplicate()
+			
+			if !combination.has(child):
+				combination[child] = 0
+			
+			combination[child] += 1
+			
+			if !combinations_[size_].has(combination):
+				combinations_[size_].append(combination)
+	
+func get_unused_values(parent_: Dictionary, origin_: Dictionary) -> Array:
+	var unuseds = []
+	
+	for value in origin_:
+		var count = origin_[value]
+		
+		if parent_.has(value):
+			count -= parent_[value]
+		
+		if count > 0:
+			unuseds.append(value)
+	
+	return unuseds
 	
 func calc_probability(aspect_: Constants.ASPECT, value_: int, n_: int, k_: int) -> float:
 	var probability = dict.dice.title[aspect_].probabilities[value_]
 	return pow(probability, n_) * pow(1 - probability, k_ - n_)
 	
 func get_pascal_triangle(n_: int, k_: int) -> int:
-	var result = 1
+	if k_ >= n_:
+		return 1
 	
-	for _i in range(k_ + 1, n_ + 1, 1):
-		result *= _i
+	if k_ <= 0:
+		return 1
 	
-	for _i in range(2, n_ - k_ + 1, 1):
-		result /= _i
+	var result = dict.factorial[n_]
+	result /= dict.factorial[k_]
+	
+	if n_ - k_ > 0:
+		result /= dict.factorial[n_ - k_]
+	
+	#var result = 1
+	#for _i in range(k_ + 1, n_ + 1, 1):
+		#result *= _i
+	#
+	#for _i in range(2, n_ - k_ + 1, 1):
+		#result /= _i
 	
 	return result
+	
+func get_partial_permutation(n_: int, k_: int) -> int:
+	var result = dict.factorial[n_]
+	result /= dict.factorial[n_ - k_]
+	#print([result, n_, k_, dict.factorial[n_], dict.factorial[n_ - k]])
+	return result
+	
+func get_negative_combination(origin_combination_: Dictionary, positive_combination_: Dictionary) -> Dictionary:
+	var negative_combination = origin_combination_.duplicate()
+	
+	for value in positive_combination_:
+		negative_combination[value] -= positive_combination_[value]
+		
+		if negative_combination[value] <= 0:
+			negative_combination.erase(value)
+	
+	return negative_combination
+	
+func get_full_combination(origin_combination_: Dictionary, positive_combination_: Dictionary) -> Dictionary:
+	var full_combination_ = positive_combination_.duplicate()
+	
+	for value in origin_combination_:
+		if !full_combination_.has(value):
+			full_combination_[value] = 0
+	
+	return full_combination_
 	
 func rnd_log_normal(a_: float, b_: float) -> float:
 	var value = smoothstep(-4, 4, randfn(0, 1))
@@ -179,3 +276,19 @@ func rnd_levy(a_: float, b_: float) -> float:
 	
 func rnd_levy_int(a_: float, b_: float) -> int:
 	return  int(rnd_levy(a_, b_))
+	
+func roll_dice(aspect_: Constants.ASPECT) -> int:
+	return dict.dice.title[aspect_].values.pick_random()
+	
+func roll_dices(aspect_: Constants.ASPECT, n_: int) -> Dictionary:
+	var rolls = {}
+	
+	for _i in n_:
+		var value = roll_dice(aspect_)
+		
+		if !rolls.has(value):
+			rolls[value] = 0
+		
+		rolls[value] += 1
+	
+	return rolls
